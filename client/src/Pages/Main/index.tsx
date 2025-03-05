@@ -43,7 +43,7 @@ const TableComponent: React.FC = () => {
   const fetchItems = async () => {
     setLoading(true);
     try {
-      const response = await axiosInstance.get(`/api/v1/allData`, {
+      const response = await axiosInstance.get(`/v1/allData`, {
         params: { page, search, limit: 1 },
       });
       setTotalItems(response.data);
@@ -103,7 +103,7 @@ const TableComponent: React.FC = () => {
       const allIds = items.map((item) => item.id);
       setSelected(allIds);
       axiosInstance
-        .post("/api/v1/updateSelected", { selected: allIds })
+        .post("/v1/updateSelected", { selected: allIds })
         .catch(console.error);
     } else {
       setSelected([]);
@@ -117,7 +117,7 @@ const TableComponent: React.FC = () => {
       console.log({ selected: updatedSelected });
       setLoading(true);
       axiosInstance
-        .post("/api/v1/updateSelected", { selected: updatedSelected })
+        .post("/v1/updateSelected", { selected: updatedSelected })
         .then(() => {
           setLoading(false);
           fetchItems();
@@ -149,7 +149,7 @@ const TableComponent: React.FC = () => {
     }));
 
     axiosInstance
-      .post("/api/v1/updateOrder", { newOrder: updatedItems })
+      .post("/v1/updateOrder", { newOrder: updatedItems })
       .then(() => {
         console.log("Order updated successfully");
         setItems(updatedItems);
